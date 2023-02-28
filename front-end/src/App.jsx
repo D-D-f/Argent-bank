@@ -1,13 +1,13 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import SignIn from "./pages/SignIn/SignIn";
+import AllRoutes from "./Router/AllRoutes";
 
 function App() {
   return (
     <>
       <Header />
-      <SignIn />
+      <AllRoutes />
       <Footer />
     </>
   );
