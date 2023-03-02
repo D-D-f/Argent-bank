@@ -1,7 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import style from "./SignIn.module.css";
 
 const SignIn = () => {
+  const [error, setError] = useState(false);
+  const Navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
@@ -16,7 +20,10 @@ const SignIn = () => {
 
       if (requete.ok) {
         const reponse = await requete.json();
-        console.log(reponse);
+        document.cookie = `token=${reponse.body.token}`;
+        Navigate("/Account");
+      } else {
+        setError(true);
       }
     } catch (e) {
       alert(e);
@@ -54,6 +61,11 @@ const SignIn = () => {
           <button type="submit" className={style.signInButton}>
             Sign In
           </button>
+          {error && (
+            <p Style="color: red; font-weight: bold">
+              Votre email ou mot de passe est incorrect !
+            </p>
+          )}
         </form>
       </section>
     </main>
