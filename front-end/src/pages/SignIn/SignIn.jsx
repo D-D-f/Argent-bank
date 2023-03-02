@@ -3,12 +3,25 @@ import style from "./SignIn.module.css";
 
 const SignIn = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (id) => {
-    console.log(JSON.stringify(id));
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const requete = await fetch("http://localhost:3001/api/v1/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const reponse = await requete.json();
+      console.log(reponse);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
-    <main className={`${style.main} ${style.bgDark}`}>
+    <main className={`${style.main} .bg-dark`}>
       <section className={style.signInContent}>
         <i className={`fa fa-user-circle ${style.signInIcon}`}></i>
         <h1>Sign In</h1>

@@ -11,7 +11,7 @@ const Header = () => {
           src={img}
           alt="Argent Bank Logo"
         />
-        <h1 className={style.srOnly}>Argent Bank</h1>
+        <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
         <Link className={style.mainNavItem} to="/Signin">

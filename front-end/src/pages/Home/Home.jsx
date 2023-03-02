@@ -9,7 +9,7 @@ const Home = () => {
     <main>
       <div className={style.hero}>
         <section className={style.heroContent}>
-          <h2 className={style.srOnly}>Promoted Content</h2>
+          <h2 className="sr-only">Promoted Content</h2>
           <p className={style.subtitle}>No fees.</p>
           <p className={style.subtitle}>No minimum deposit.</p>
           <p className={style.subtitle}>High interest rates.</p>
@@ -19,7 +19,7 @@ const Home = () => {
         </section>
       </div>
       <section className={style.features}>
-        <h2 className={style.srOnly}>Features</h2>
+        <h2 className="sr-only">Features</h2>
         <Information
           img={iconChat}
           title="You are our #1 priority"
