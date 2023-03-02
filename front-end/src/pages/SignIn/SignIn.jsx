@@ -5,7 +5,7 @@ import style from "./SignIn.module.css";
 
 const SignIn = () => {
   const [error, setError] = useState(false);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
@@ -21,7 +21,7 @@ const SignIn = () => {
       if (requete.ok) {
         const reponse = await requete.json();
         document.cookie = `token=${reponse.body.token}`;
-        Navigate("/Account");
+        navigate("/Account");
       } else {
         setError(true);
       }
