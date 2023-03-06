@@ -1,10 +1,25 @@
 import style from "./Header.module.css";
 import img from "../../assets/img/argentBankLogo.png";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
+import { getUser } from "../../redux/Reducers/ProfilReducer";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const Header = () => {
-  const { user } = useSelector((state) => ({ ...state.UserReducer }));
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({
+    ...state.UserReducer,
+    ...state.TokenReducer,
+  }));
+  const cookie = Cookies.get("token");
+  useEffect(() => {
+    if (cookie) {
+      dispatch(getUser(cookie));
+    }
+  }, []);
+
   return (
     <nav className={style.mainNav}>
       <Link className={style.mainNavLogo} to="/">
@@ -16,13 +31,14 @@ const Header = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        {user.status === 200 ? (
+        {user !== null ? (
           <>
             <Link className={style.mainNavItem} to="/Account">
               <i className="fa fa-user-circle"></i>
               {user.body.firstName}
             </Link>
-            <Link className={style.mainNavItem} to="/Signin">
+            <Link className={style.mainNavItem} to="/">
+              <i className="fa-solid fa-right-from-bracket"></i>
               Signout
             </Link>
           </>
@@ -33,6 +49,7 @@ const Header = () => {
           </Link>
         )}
       </div>
+      {}
     </nav>
   );
 };

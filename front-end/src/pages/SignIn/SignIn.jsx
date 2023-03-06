@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signin } from "../../apis/auth";
+import Cookies from "js-cookie";
 import { getProfile } from "../../apis/profile";
 import style from "./SignIn.module.css";
 
@@ -16,11 +17,16 @@ const SignIn = () => {
     try {
       const connectionUser = await signin(data);
       const { token } = connectionUser?.body;
+      Cookies.set("token", token);
       const profile = await getProfile(token);
-      if (profile.status === 200) {
+      if (profile) {
         dispatch({
           type: "SET_PROFILE",
           payload: profile,
+        });
+        dispatch({
+          type: "SET_TOKEN",
+          payload: token,
         });
         navigate("/Account");
       }
