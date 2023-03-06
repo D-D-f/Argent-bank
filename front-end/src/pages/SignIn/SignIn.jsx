@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signin } from "../../apis/auth";
+import { getProfile } from "../../apis/profile";
 import style from "./SignIn.module.css";
 
 const SignIn = () => {
@@ -15,19 +16,11 @@ const SignIn = () => {
     try {
       const connectionUser = await signin(data);
       const { token } = connectionUser?.body;
-      const requete = await fetch("http://localhost:3001/api/v1/user/profile", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          accept: "application/json",
-        },
-      });
-
-      if (requete.ok) {
-        const response = await requete.json();
+      const profile = await getProfile(token);
+      if (profile.status === 200) {
         dispatch({
           type: "SET_PROFILE",
-          payload: response,
+          payload: profile,
         });
         navigate("/Account");
       }
