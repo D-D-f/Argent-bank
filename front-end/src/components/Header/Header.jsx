@@ -20,6 +20,9 @@ const Header = () => {
   const handleDeleteCookie = () => {
     Cookies.remove("token");
     setIsLoggedIn(false);
+    dispatch({
+      type: "OUT_PROFILE",
+    });
   };
 
   useEffect(() => {
