@@ -5,20 +5,29 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import { getUser } from "../../redux/Reducers/ProfilReducer";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
+  const cookie = Cookies.get("token");
+
   const { user } = useSelector((state) => ({
     ...state.UserReducer,
     ...state.TokenReducer,
   }));
-  const cookie = Cookies.get("token");
+
+  const handleDeleteCookie = () => {
+    Cookies.remove("token");
+    setIsLoggedIn(false);
+  };
+
   useEffect(() => {
     if (cookie) {
+      setIsLoggedIn(true);
       dispatch(getUser(cookie));
     }
-  }, []);
+  }, [cookie, dispatch]);
 
   return (
     <nav className={style.mainNav}>
@@ -31,14 +40,21 @@ const Header = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        {user !== null ? (
+        {isLoggedIn ? (
           <>
             <Link className={style.mainNavItem} to="/Account">
               <i className="fa fa-user-circle"></i>
-              {user.body.firstName}
+              {user?.body.firstName}
             </Link>
-            <Link className={style.mainNavItem} to="/">
-              <i className="fa-solid fa-right-from-bracket"></i>
+            <Link
+              onClick={handleDeleteCookie}
+              className={style.mainNavItem}
+              to="/Signin"
+            >
+              <i
+                onClick={handleDeleteCookie}
+                className="fa-solid fa-right-from-bracket"
+              ></i>
               Signout
             </Link>
           </>

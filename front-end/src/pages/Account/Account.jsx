@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 
 const Account = () => {
   const user = useSelector((state) => ({ ...state.UserReducer }));
-
-  console.log();
   return (
     <main className={`${style.main} bg-dark`}>
       <div className={style.header}>
