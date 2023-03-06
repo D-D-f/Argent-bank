@@ -4,6 +4,8 @@ specifiers:
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
   '@vitejs/plugin-react': ^3.1.0
+  js-cookie: ^3.0.1
+  jscookie: ^1.1.0
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.43.2
@@ -13,6 +15,8 @@ specifiers:
   vite: ^4.1.0
 
 dependencies:
+  js-cookie: 3.0.1
+  jscookie: 1.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.2_react@18.2.0
@@ -699,8 +703,17 @@ packages:
       has: 1.0.3
     dev: true
 
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+
+  /jscookie/1.1.0:
+    resolution: {integrity: sha512-gicBA4BI3iVGPRTtRfWJE+20Oc+JzMR7oP2YiLjbvtDXOlihD5qM7l5hUopvdmqqgMhEuvDa3fsLd+SyGf2/hA==}
+    dev: false
 
   /jsesc/2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}

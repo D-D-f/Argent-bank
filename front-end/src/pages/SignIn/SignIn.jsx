@@ -1,32 +1,39 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signin } from "../../apis/auth";
 import style from "./SignIn.module.css";
 
 const SignIn = () => {
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
-      const requete = await fetch("http://localhost:3001/api/v1/user/login", {
+      const connectionUser = await signin(data);
+      const { token } = connectionUser?.body;
+      const requete = await fetch("http://localhost:3001/api/v1/user/profile", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           accept: "application/json",
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
       });
 
       if (requete.ok) {
-        const reponse = await requete.json();
-        document.cookie = `token=${reponse.body.token}`;
+        const response = await requete.json();
+        dispatch({
+          type: "SET_PROFILE",
+          payload: response,
+        });
         navigate("/Account");
-      } else {
-        setError(true);
       }
     } catch (e) {
-      alert(e);
+      setError(true);
+      console.log(e);
     }
   };
 
@@ -62,7 +69,7 @@ const SignIn = () => {
             Sign In
           </button>
           {error && (
-            <p Style="color: red; font-weight: bold">
+            <p className={style.error}>
               Votre email ou mot de passe est incorrect !
             </p>
           )}
