@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import { getUser } from "../../redux/Reducers/ProfilReducer";
+import { getUserName } from "../../redux/Reducers/UserNameReducer";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -13,9 +14,11 @@ const Header = () => {
   const dispatch = useDispatch();
   const cookie = Cookies.get("token");
 
-  const { user } = useSelector((state) => ({
-    ...state.UserReducer,
+  const { userName } = useSelector((state) => ({
+    ...state.UserNameReducer,
   }));
+
+  console.log(userName);
 
   const handleDeleteCookie = () => {
     Cookies.remove("token");
@@ -29,6 +32,7 @@ const Header = () => {
     if (cookie) {
       setIsLoggedIn(true);
       dispatch(getUser(cookie));
+      dispatch(getUserName(cookie));
     }
   }, [cookie, dispatch]);
 
@@ -47,7 +51,7 @@ const Header = () => {
           <>
             <Link className={style.mainNavItem} to="/Account">
               <i className="fa fa-user-circle"></i>
-              {user?.body.userName}
+              {userName?.body.userName}
             </Link>
             <Link
               onClick={handleDeleteCookie}

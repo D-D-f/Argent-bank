@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { changeUserName } from "../../apis/changeUserName";
 import style from "./EditName.module.css";
 
 const EditName = ({ visible }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => ({
     ...state.UserReducer,
   }));
@@ -15,7 +17,13 @@ const EditName = ({ visible }) => {
 
   const onSubmit = async (data) => {
     try {
-      await changeUserName(data, cookie);
+      const changeName = await changeUserName(data, cookie);
+      if (changeName) {
+        dispatch({
+          type: "SET_USERNAME",
+          payload: changeName,
+        });
+      }
       visible();
     } catch (e) {
       console.log(e);
