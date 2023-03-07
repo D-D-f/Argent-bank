@@ -31,28 +31,39 @@ const EditName = ({ visible }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p>
-        <label htmlFor="userName">User Name: </label>
-        <input {...register("userName")} type="text" name="userName" />
-      </p>
-      <p>
-        <label htmlFor="firstName">First Name: </label>
-        <input type="text" name="firstName" defaultValue={firstName} disabled />
-      </p>
-      <p>
-        <label htmlFor="lastName">Last Name: </label>
-        <input type="text" name="lastName" defaultValue={lastName} disabled />
-      </p>
-      <div className={style.allBtn}>
-        <button type="submit" className={`sign-in-button ${style.btnEdit}`}>
-          Save
-        </button>
-        <button className={`sign-in-button ${style.btnEdit}`} onClick={visible}>
-          Cancel
-        </button>
-      </div>
-    </form>
+    <>
+      <h2>Edit user info</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <p>
+          <label htmlFor="userName">User Name: </label>
+          <input {...register("userName")} type="text" name="userName" />
+        </p>
+        <p>
+          <label htmlFor="firstName">First Name: </label>
+          <input
+            type="text"
+            name="firstName"
+            defaultValue={firstName}
+            disabled
+          />
+        </p>
+        <p>
+          <label htmlFor="lastName">Last Name: </label>
+          <input type="text" name="lastName" defaultValue={lastName} disabled />
+        </p>
+        <div className={style.allBtn}>
+          <button type="submit" className={`sign-in-button ${style.btnEdit}`}>
+            Save
+          </button>
+          <button
+            className={`sign-in-button ${style.btnEdit}`}
+            onClick={visible}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

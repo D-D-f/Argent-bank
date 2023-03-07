@@ -18,8 +18,6 @@ const Header = () => {
     ...state.UserNameReducer,
   }));
 
-  console.log(userName);
-
   const handleDeleteCookie = () => {
     Cookies.remove("token");
     setIsLoggedIn(false);

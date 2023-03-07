@@ -8,3 +8,11 @@
   margin: 2em;
   cursor: pointer;
 }
+
+label {
+  color: white;
+}
+
+h2 {
+  color: white;
+}
