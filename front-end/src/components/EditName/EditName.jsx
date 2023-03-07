@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import style from "./EditName.module.css";
 
-const EditName = ({ firstName, lastName }) => {
+const EditName = () => {
+  const { user } = useSelector((state) => ({ ...state.UserReducer }));
+  const firstName = user?.body?.firstName;
+  const lastName = user?.body?.lastName;
   const { register, handleSubmit } = useForm();
 
   const onSubmit = () => {};
@@ -14,11 +18,11 @@ const EditName = ({ firstName, lastName }) => {
       </p>
       <p>
         <label htmlFor="firstName">First Name: </label>
-        <input type="text" name="firstName" value={firstName} disabled />
+        <input type="text" name="firstName" defaultValue={firstName} disabled />
       </p>
       <p>
         <label htmlFor="lastName">Last Name: </label>
-        <input type="text" name="lastName" value={lastName} disabled />
+        <input type="text" name="lastName" defaultValue={lastName} disabled />
       </p>
       <div className={style.allBtn}>
         <button type="submit" className={`sign-in-button ${style.btnEdit}`}>
