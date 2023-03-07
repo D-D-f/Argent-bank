@@ -6,4 +6,5 @@
 .btnEdit {
   width: 100px;
   margin: 2em;
+  cursor: pointer;
 }

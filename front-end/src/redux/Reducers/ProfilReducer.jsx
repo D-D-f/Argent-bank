@@ -31,7 +31,6 @@ export const getUser = (token) => (dispatch) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       dispatch({
         type: "SET_PROFILE",
         payload: data,

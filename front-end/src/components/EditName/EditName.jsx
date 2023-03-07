@@ -1,14 +1,26 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
+import { changeUserName } from "../../apis/changeUserName";
 import style from "./EditName.module.css";
 
-const EditName = () => {
-  const { user } = useSelector((state) => ({ ...state.UserReducer }));
+const EditName = ({ visible }) => {
+  const { user } = useSelector((state) => ({
+    ...state.UserReducer,
+  }));
   const firstName = user?.body?.firstName;
   const lastName = user?.body?.lastName;
   const { register, handleSubmit } = useForm();
+  const cookie = Cookies.get("token");
 
-  const onSubmit = () => {};
+  const onSubmit = async (data) => {
+    try {
+      await changeUserName(data, cookie);
+      visible();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -28,7 +40,9 @@ const EditName = () => {
         <button type="submit" className={`sign-in-button ${style.btnEdit}`}>
           Save
         </button>
-        <button className={`sign-in-button ${style.btnEdit}`}>Cancel</button>
+        <button className={`sign-in-button ${style.btnEdit}`} onClick={visible}>
+          Cancel
+        </button>
       </div>
     </form>
   );

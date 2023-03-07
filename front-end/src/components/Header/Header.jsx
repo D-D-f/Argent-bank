@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const dispatch = useDispatch();
   const cookie = Cookies.get("token");
 
@@ -46,7 +47,7 @@ const Header = () => {
           <>
             <Link className={style.mainNavItem} to="/Account">
               <i className="fa fa-user-circle"></i>
-              {user?.body.firstName}
+              {user?.body.userName}
             </Link>
             <Link
               onClick={handleDeleteCookie}
