@@ -14,7 +14,6 @@ const Header = () => {
 
   const { user } = useSelector((state) => ({
     ...state.UserReducer,
-    ...state.TokenReducer,
   }));
 
   const handleDeleteCookie = () => {

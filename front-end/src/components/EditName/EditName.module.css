@@ -1,0 +1,9 @@
+.allBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.btnEdit {
+  width: 10%;
+  margin: 2em;
+}
