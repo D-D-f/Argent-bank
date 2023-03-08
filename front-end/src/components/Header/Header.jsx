@@ -10,10 +10,8 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const dispatch = useDispatch();
   const cookie = Cookies.get("token");
-
   const { userName } = useSelector((state) => ({
     ...state.UserNameReducer,
   }));
@@ -24,11 +22,19 @@ const Header = () => {
     dispatch({
       type: "OUT_PROFILE",
     });
+    dispatch({
+      type: "SET_AUTH",
+      payload: false,
+    });
   };
 
   useEffect(() => {
     if (cookie) {
       setIsLoggedIn(true);
+      dispatch({
+        type: "SET_AUTH",
+        payload: true,
+      });
       dispatch(getUser(cookie));
       dispatch(getUserName(cookie));
     }
