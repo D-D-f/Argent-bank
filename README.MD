@@ -28,7 +28,7 @@ Vous venez de commencer à travailler chez Remede Agency, une agence spécialis�
 
 
 
-<p align="center">
+<p>
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=react,redux,css,github" />
   </a>
